@@ -36,6 +36,14 @@ public class BuddySystem {
             return false;
         return  isAllSet(offset*2+1) && isAllSet(offset*2+2);
     }
+    
+    public void printArray() {
+        for (int i =0 ; i < array.length; i++) {
+            System.out.println("("+i+")" + array[i]+" ");
+        }
+        System.out.println();
+    }
+    
     public void setBit(int offset, int len) {
         if (offset < 0 || offset >= array.length)
             return;
@@ -48,15 +56,8 @@ public class BuddySystem {
         int idx = offset;
         while (idx > 0) {
             int parent = (offset-1)/2;
-            int left = parent*2 +1;
-            int right = parent*2+2;
-            boolean flag = false;
-            if (left == idx) {
-                flag = array[right] == 1;
-            } else {
-                flag = array[left] == 1;
-            }
-            
+            int sibling = idx % 2 == 0 ? idx-1: idx+1;
+            boolean flag = array[sibling] == 1? true:false;
             if (flag) {
                 idx = parent;
                 array[parent] = 1;
@@ -69,5 +70,10 @@ public class BuddySystem {
     
     public static void main(String args[]) {
         
+        int a1[] = { 0,0,1,0,1,1,0,1,1,1};
+        
+        BuddySystem b = new BuddySystem(a1);
+        
+        b.setBit(7, 1);
     }
 }
