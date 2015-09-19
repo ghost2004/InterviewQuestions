@@ -105,6 +105,14 @@ public class BuddySystem {
         b.printArray();
         b.clearBit(7, 4);
         b.printArray();
+        b.clearBit(0, 1);
+        b.printArray();
+        b.clearBit(5, 1);
+        b.printArray();
+        b.setBit(3, 3);
+        b.printArray();
+        b.clearBit(3, 3);
+        b.printArray();
     }
 }
 
