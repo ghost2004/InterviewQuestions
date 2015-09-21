@@ -17,7 +17,7 @@ public class MapWithTime {
         TreeMap<Integer,Integer> map = entryMap.get(key);
         if (map == null) {
             map = new TreeMap<Integer, Integer>();
-            entryMap.put(time, map);
+            entryMap.put(key, map);
         }
         map.put(time, value);
     }
@@ -30,6 +30,16 @@ public class MapWithTime {
         if (entry == null)
             return null;
         return entry.getValue();
+    }
+    
+    public static void main(String args[]) {
+        MapWithTime m = new MapWithTime();
+        m.put(1, 1, 10);
+        m.put(1, 2, 20);
+        m.put(1, 3, 30);
+        m.put(1, 4, 40);
+        System.out.println(m.get(1, 15));
+        System.out.println(m.get(1, 25));
     }
 
 }
