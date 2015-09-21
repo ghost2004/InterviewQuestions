@@ -27,6 +27,8 @@ public class MapWithTime {
         if (map == null)
             return null;
         Map.Entry<Integer, Integer> entry =  map.lowerEntry(time);
+        if (entry == null)
+            return null;
         return entry.getValue();
     }
 
