@@ -20,6 +20,7 @@ For example, the lowest common ancestor (LCA) of nodes 2 and 8 is 6. Another
  */
 import Common.TreeNode;
 public class LCAofBST {
+    // recursive solution
     public TreeNode findLCA(TreeNode node, int min, int max) {
         if (node == null)
             return null;
@@ -50,4 +51,34 @@ public class LCAofBST {
         
         return findLCA(root, min, max);
     }
+    
+    // iterative solution
+    public TreeNode lcaFind(TreeNode root, TreeNode p, TreeNode q) {
+        if (root == null)
+            return null;
+        TreeNode cur = root;
+        int min,max;
+        if (p.val > q.val) {
+            min = q.val;
+            max = p.val;
+        } else {
+            min = p.val;
+            max = q.val;
+        }
+        
+        while (cur != null) {
+            if (cur.val > min && cur.val < max)
+                return cur;
+            if (cur.val == min || cur.val ==max)
+                 return cur;
+            if (cur.val < min)
+                cur = cur.right;
+            else 
+                cur = cur.left;
+        }
+        
+        return cur;
+                    
+    }
+    
 }
