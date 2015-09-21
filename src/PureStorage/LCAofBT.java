@@ -36,14 +36,5 @@ public class LCAofBT {
         return right;
     }
     
-    // iterative solution
-    public TreeNode LCA(TreeNode root, TreeNode p, TreeNode q) {
-        if (root == null)
-            return null;
-        TreeNode cur = root;
-        Stack<TreeNode> stack = new Stack<TreeNode>();
-        
-        return cur;
-        
-    }
+
 }
