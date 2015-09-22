@@ -49,7 +49,7 @@ public class WordLadderII {
         unvisited.addAll(wordList);
         unvisited.add(endWord);
         
-        queue.offer(new WordNode(beginWord, 0, null));
+        queue.offer(new WordNode(beginWord, 1, null));
         int minStep = 0;
         int preStep = 0;
         while (!queue.isEmpty()) {
@@ -88,7 +88,7 @@ public class WordLadderII {
                     }
 
                     String next = new String(array);
-                    if (unvisited.contains(key)) {
+                    if (unvisited.contains(next)) {
                         queue.add(new WordNode(next, preStep+1, n));
                         visited.add(next);
                     }
@@ -99,5 +99,28 @@ public class WordLadderII {
         }
         
         return result;
+    }
+    
+    public void printLadder(String beginWord, String endWord, Set<String> wordList) {
+        List<List<String>> list = findLadders(beginWord, endWord, wordList);
+        for (int i = 0; i < list.size(); i++) {
+            List<String> item = list.get(i);
+            for (int j = 0; j < item.size(); j++) {
+                System.out.print(item.get(j));
+                if (j < item.size()-1)
+                    System.out.print("-->");
+            }
+            System.out.println();
+        }
+    }
+    
+    public static void main(String args[]) {
+        WordLadderII w = new WordLadderII();
+        HashSet<String> dict = new HashSet<String>();
+        dict.add("hot");
+        dict.add("hog");
+        dict.add("dog");
+        w.printLadder("hot", "dog", dict);
+        
     }
 }
