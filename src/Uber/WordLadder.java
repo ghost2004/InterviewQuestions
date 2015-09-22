@@ -29,7 +29,6 @@ public class WordLadder {
         queue.offer(beginWord);
         map.put(beginWord, 1);
         int length = beginWord.length();
-        
         while (!queue.isEmpty()) {
             String candidate = queue.poll();
             int steps =  map.get(candidate)+1;
