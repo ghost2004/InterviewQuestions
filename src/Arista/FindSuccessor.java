@@ -45,6 +45,7 @@ public class FindSuccessor {
         f.prtSuc(t1, 100);
         f.prtSuc(t1, 130);
         f.prtSuc(t1, 50);
+        f.prtSuc(t1, 70);
         f.prtSuc(t1, 30);
         f.prtSuc(t1, 10);
         f.prtSuc(t1, 150);
