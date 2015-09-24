@@ -43,6 +43,7 @@ public class FindSuccessor {
         FindSuccessor f = new FindSuccessor();
         TreeNode t1 = TreeNode.deserialize("100,50,30,#,#,70,#,#,150,130");
         f.prtSuc(t1, 100);
+        f.prtSuc(t1, 130);
         f.prtSuc(t1, 50);
         f.prtSuc(t1, 30);
         f.prtSuc(t1, 10);
