@@ -22,7 +22,7 @@ public class MinDistanceIn2Arrays {
         
         if (idx1 < array1.length) {
             idx2 = array2.length - 1;
-            while (idx1 < array1.length && array1[idx1] <= array1[idx2] ) {
+            while (idx1 < array1.length ) {
                 
                 int diff = Math.abs(array1[idx1]  - array2[idx2]);
                 minDiff = Math.min(minDiff, diff);
@@ -30,7 +30,7 @@ public class MinDistanceIn2Arrays {
             }
         } else {
             idx1 = array1.length - 1;
-            while (idx2 < array2.length && array1[idx1] >= array1[idx2]  ) {
+            while (idx2 < array2.length  ) {
                 
                 int diff = Math.abs(array1[idx1]  - array2[idx2]);
                 minDiff = Math.min(minDiff, diff);
@@ -40,6 +40,8 @@ public class MinDistanceIn2Arrays {
         
         return minDiff;
     }
+    
+    
     public static void main(String [] args)
     {
         int [] array1 = {12, 34, 57, 61, 69, 80};
@@ -48,8 +50,12 @@ public class MinDistanceIn2Arrays {
         int a2[] = { 100,200};
         int a3[] = {-100, 4, 50,65};
         int a4[] = {55, 80,100,200};
-        System.out.println(findMinDiff(array1,array2));
-        System.out.println(findMinDiff(a1,a2));
-        System.out.println(findMinDiff(a3,a4));
+        int t1[] = {0};
+        int t2[] = {1,2,3};
+        int t3[] = {4};
+
+        System.out.println(findMinDiff(t1,t2));
+        System.out.println(findMinDiff(t3,t2));
+        System.out.println(findMinDiff(t1,t3));
     }
 }
