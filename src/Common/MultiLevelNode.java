@@ -4,8 +4,8 @@ package Common;
 
 public class MultiLevelNode {
     public int value;
-    MultiLevelNode next;
-    MultiLevelNode prev;
-    MultiLevelNode up;
-    MultiLevelNode down;
+    public MultiLevelNode next;
+    public MultiLevelNode prev;
+    public MultiLevelNode up;
+    public MultiLevelNode down;
 }
