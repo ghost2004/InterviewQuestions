@@ -1,10 +1,5 @@
 package Linkedin;
-<<<<<<< HEAD
 
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
-
-=======
->>>>>>> origin/master
 /*
  * Given a multi-level list, return the sum of all level depth
  * 
@@ -57,10 +52,7 @@ public class LevelDepthSum {
         }
         
         return sum;
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/master
     }
     
     public static void main(String args[]) {
