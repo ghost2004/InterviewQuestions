@@ -4,18 +4,23 @@ package Arista;
  */
 public class FindMissingNumber {
     public int findMissing(int a[]) {
+        // setup left and right index for binary search
         int left = 0;
         int right = a.length - 1;
         int expect = a[0];
         while (left < right) {
+            // only 2 elements left here, just return the middle value of them
             if (right == left +1)
                 return a[left]+1;
+            // get the middle index
             int mid = (left+right)/2;
-
+            // here is what we expected if it was a continuous array
             expect = a[left] + mid - left;
             if (a[mid] == expect) {
+                // everything is there in left sub-array, search in the right sub-array
                 left = mid+1;
             } else {
+                // something missing in the left sub-array
                 right = mid;
             }
             
