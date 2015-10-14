@@ -7,25 +7,31 @@ public class FindSuccessor {
     public TreeNode findSuccessor(TreeNode root, int key) {
         TreeNode cur,suc;
         cur = suc = root;
+        // find the key with BST search
         while (cur != null) {
            if (cur.val == key)
                break;
            else if (key < cur.val) {
+               // key is in the left sub-tree, change the successor to current one
                suc = cur;
                cur = cur.left;
            } else {
+               // key is in the right sub-tree. keep the successor as the same one
                cur = cur.right;
            }
         }
         
+        // return null if didn't find the key
         if (cur == null)
             return null;
         if (cur.right != null) {
+            // the key has right sub-tree, the successor is the most left one in right-subtree
             TreeNode t = cur.right;
             while (t.left!= null)
                 t = t.left;
             return t;
         }
+        // in case of the key is the biggest one in the BST
         if (suc.val < key)
             return null;
         return suc;
