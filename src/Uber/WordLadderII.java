@@ -42,27 +42,38 @@ public class WordLadderII {
             result.add(item);
             return result;
         }
+        //linked list for candidates
         LinkedList<WordNode> queue = new LinkedList<WordNode>();
+        // visited nodes
         HashSet<String> visited = new HashSet<String>();
+        // unvisited nodes
         HashSet<String> unvisited = new HashSet<String>();
         
+        // at beginning, no word is visited
         unvisited.addAll(wordList);
         unvisited.add(endWord);
         
+        // put the first word into queue, step is 1 and no previous node
         queue.offer(new WordNode(beginWord, 1, null));
         int minStep = 0;
         int preStep = 0;
         while (!queue.isEmpty()) {
+            // get word node from queue
             WordNode n = queue.poll();
             String key = n.word;
+            // check if we reach the end
             if (key.equals(endWord)) {
+                // set min step if it was not set before
                 if (minStep == 0)
                     minStep = n.step;
                 if (n.step <= minStep) {
+                    // get the min step
                     if (n.step < minStep) {
+                        // clear the result if this one is shorter than older one
                         minStep = n.step;
                         result.clear();
                     }
+                    // reverse the linked list and put into result
                     List<String> item = new ArrayList<String>();
                     WordNode cur = n;
                     while (cur != null) {
@@ -74,12 +85,14 @@ public class WordLadderII {
                 continue;
             }
             
+            // only remove the node from visited when we get less steps
             if (preStep < n.step) {
                 unvisited.removeAll(visited);
             }
-            
+            // update previous step
             preStep = n.step;
             char array[] = key.toCharArray();
+            // change the possible characters in the string
             for (int i = 0; i < array.length; i++) {
                 for (char a = 'a'; a <= 'z';a++) {
                     char temp = array[i];
@@ -89,6 +102,7 @@ public class WordLadderII {
 
                     String next = new String(array);
                     if (unvisited.contains(next)) {
+                        // if it is not visited yet, put it into queue
                         queue.add(new WordNode(next, preStep+1, n));
                         visited.add(next);
                     }
