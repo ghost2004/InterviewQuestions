@@ -8,6 +8,24 @@ package Facebook;
  * 
  * Follow up: Given a task list and interval, return the sequence that requires minimum time.
  */
+import java.util.*;
 public class TaskSchedule {
-
+    public int runningTime(int tasks[], int interval[]) {
+        HashMap<Integer, Integer> map = new HashMap<Integer, Integer> ();
+        int time = 1;
+        map.put(tasks[0], 1);
+        for (int i = 0; i < tasks.length; i++) {
+            Integer last = map.get(tasks[i]);
+            if (last == null || last < time - interval[tasks[i]]) {
+                time++;
+                
+            } else {
+                time = last + interval[tasks[i]] + 1;
+                
+            }
+            map.put(tasks[i], time);
+            
+        }
+        return time;
+    }
 }
