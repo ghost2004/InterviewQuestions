@@ -10,11 +10,12 @@ package Facebook;
  */
 import java.util.*;
 public class TaskSchedule {
+    // Implementation with Hash Map
     public int runningTime(int tasks[], int interval[]) {
         HashMap<Integer, Integer> map = new HashMap<Integer, Integer> ();
         int time = 1;
         map.put(tasks[0], 1);
-        for (int i = 0; i < tasks.length; i++) {
+        for (int i = 1; i < tasks.length; i++) {
             Integer last = map.get(tasks[i]);
             if (last == null || last < time - interval[tasks[i]]) {
                 time++;
@@ -27,5 +28,18 @@ public class TaskSchedule {
             
         }
         return time;
+    }
+    
+    public int runTime(int tasks[], int interval[]) {
+        int time =1;
+        
+        return time;
+    }
+    public static void main(String args[]) {
+        TaskSchedule sch = new TaskSchedule();
+        int task1[] = {1, 1, 2, 1};
+        int interval1[] = { 2, 2 ,2};
+        
+        System.out.println(sch.runningTime(task1, interval1));
     }
 }
