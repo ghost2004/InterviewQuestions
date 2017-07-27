@@ -30,16 +30,60 @@ public class TaskSchedule {
         return time;
     }
     
-    public int runTime(int tasks[], int interval[]) {
-        int time =1;
+    /* 
+     * a little bit changes
+     * 
+     * The interval for all tasks are same, implemented in linked list
+     * 
+     */
+    
+    private class TaskPair{
+        int timestamp;
+        int taskId;
         
+        public TaskPair(int id, int time) {
+            timestamp = time;
+            taskId = id;
+        }
+    }
+    
+    public int runTime(int tasks[], int interval) {
+        int time =1;
+        LinkedList<TaskPair> cur = new LinkedList<TaskPair>();
+        LinkedList<TaskPair> next;
+        cur.add(new TaskPair(tasks[0], time));
+        
+        for (int i = 1; i < tasks.length; i++) {
+            next = new LinkedList<TaskPair>();
+            boolean matched = false;
+            while (!cur.isEmpty()) {
+                TaskPair t = cur.poll();
+                if (t.timestamp + interval > time)  {
+                    if (t.taskId == tasks[i]) {
+                        time = t.timestamp + interval + 1;
+                        matched = true;
+                    } else {
+                        next.offer(t);
+                    }
+                }
+            }
+            
+            if (!matched) {
+                time++;
+            }
+            
+            next.offer(new TaskPair(tasks[i],time));
+            
+            cur = next;
+            
+        }
         return time;
     }
     public static void main(String args[]) {
         TaskSchedule sch = new TaskSchedule();
         int task1[] = {1, 1, 2, 1};
-        int interval1[] = { 2, 2 ,2};
+        int interval1 = 2;
         
-        System.out.println(sch.runningTime(task1, interval1));
+        System.out.println(sch.runTime(task1, interval1));
     }
 }
