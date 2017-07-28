@@ -79,6 +79,28 @@ public class TaskSchedule {
         }
         return time;
     }
+    
+    /*
+     * Here is for the follow up:
+     * 
+     * Given a task list and interval, return the sequence that requires minimum time.
+     * 
+     * eg: input 111222, 2
+     * output 12_12_12
+     * "_" represents do nothing but waiting
+     * 
+     */
+    
+    public String getBestList(int tasks[], int interval) {
+        StringBuilder sb = new StringBuilder();
+        HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
+        
+        
+        
+        return sb.toString();
+    }
+    
+    
     public static void main(String args[]) {
         TaskSchedule sch = new TaskSchedule();
         int task1[] = {1, 1, 2, 1};
