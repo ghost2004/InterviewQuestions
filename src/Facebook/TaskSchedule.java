@@ -91,9 +91,50 @@ public class TaskSchedule {
      * 
      */
     
+    public Comparator<Map.Entry<Integer, Integer>> cntCompator = new Comparator<Map.Entry<Integer, Integer>>() {
+        public int compare(Map.Entry<Integer, Integer> c1, Map.Entry<Integer, Integer> c2) {
+            return c2.getValue() - c1.getValue();
+        }
+    };
     public String getBestList(int tasks[], int interval) {
         StringBuilder sb = new StringBuilder();
         HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
+        
+        for (int i = 0; i < tasks.length; i++) {
+            Integer count = map.get(tasks[i]);
+            if (count == null)
+                map.put(tasks[i], 1);
+            else 
+                map.put(tasks[i], count + 1);
+        }
+        
+        PriorityQueue<Map.Entry<Integer, Integer>> cur = new PriorityQueue<Map.Entry<Integer, Integer>>(cntCompator);
+        
+        cur.addAll(map.entrySet());
+        
+        while (!cur.isEmpty()) {
+            int cnt = 0;
+            PriorityQueue<Map.Entry<Integer, Integer>> next = new PriorityQueue<Map.Entry<Integer, Integer>>(cntCompator);
+            while (!cur.isEmpty() && cnt <= interval) {
+                Map.Entry<Integer, Integer> item = cur.poll();
+                cnt++;
+                sb.append(item.getKey());
+                if (item.getValue() > 1)  {
+                    item.setValue(item.getValue()-1);
+                    next.offer(item);
+                    
+                }
+                    
+            }
+            
+            while (!cur.isEmpty())
+                next.offer(cur.poll());
+
+            for (int i = cnt; i <= interval && !next.isEmpty(); i++)
+                sb.append("_");
+            
+            cur = next;
+        }
         
         
         
@@ -107,5 +148,12 @@ public class TaskSchedule {
         int interval1 = 2;
         
         System.out.println(sch.runTime(task1, interval1));
+        
+        int task2[] = {1,1,1,2,2,2};
+        int task3[] = {1 ,3 ,1,1,2,2,2,4};
+        System.out.println(sch.getBestList(task2, interval1));
+        System.out.println(sch.getBestList(task2, 3));
+        System.out.println(sch.getBestList(task3, 3));
+        System.out.println(sch.getBestList(task3, 2));
     }
 }
