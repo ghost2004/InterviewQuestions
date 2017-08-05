@@ -59,4 +59,46 @@ public class NestedInteger {
         sb.append("]");
         return sb.toString();
     }
+    
+    public static NestedInteger getFromString(String input) {
+        NestedInteger out = new NestedInteger();
+        Stack<NestedInteger> stack = new Stack<NestedInteger>();
+        
+        int idx = 0;
+
+        NestedInteger cur = out;
+        
+        while (idx < input.length()) {
+            char c = input.charAt(idx);
+            
+            if (c == '[') {
+                NestedInteger next = new NestedInteger();
+                cur.list.add(next);
+                stack.push(cur);
+                cur = next;
+                idx++;
+            } else if (c == ']') {
+                cur = stack.pop();
+                idx++;
+            } else if (Character.isDigit(c)){
+                int rIdx = idx+1;
+                while (rIdx < input.length() && Character.isDigit(input.charAt(rIdx)))
+                    rIdx++;
+                NestedInteger val = new NestedInteger(Integer.parseInt(input.substring(idx, rIdx)));
+                cur.list.add(val);
+                idx = rIdx+1;
+            }
+            
+            
+        }
+
+        return out;
+    }
+    
+    public static void main(String args[]) {
+        String test1 = "[[1,1],2,[1,1]]";
+        String test2 = "[1,[4,[6]]]";
+        
+        System.out.println();
+    }
 }
