@@ -45,7 +45,7 @@ public class NestedInteger {
         if(thisNi.isInteger()) {
             sb.append(thisNi.integer);
             sb.append(",");
-            return;
+
         }
         sb.append("[");
         int size = thisNi.list.size();
@@ -58,6 +58,8 @@ public class NestedInteger {
             }
             else {
                 printNi(ni, sb);
+                if (cnt < size-1)
+                    sb.append(",");
             }
             cnt++;
         }
@@ -68,9 +70,10 @@ public class NestedInteger {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         this.printNi(this, sb);
-        
-        return sb.toString();
+        String out = sb.toString();
+        return out.substring(1, out.length()-1);
     }
+
     public static NestedInteger getFromString(String input) {
         NestedInteger out = new NestedInteger();
         Stack<NestedInteger> stack = new Stack<NestedInteger>();
@@ -97,7 +100,7 @@ public class NestedInteger {
                     rIdx++;
                 NestedInteger val = new NestedInteger(Integer.parseInt(input.substring(idx, rIdx)));
                 cur.list.add(val);
-                idx = rIdx+1;
+                idx = rIdx;
             } else
                 idx++;
             
@@ -110,8 +113,10 @@ public class NestedInteger {
     public static void main(String args[]) {
         String test1 = "[[1,1],2,[1,1]]";
         String test2 = "[1,[4,[6]]]";
+        String test3 = "[1]";
         NestedInteger t1 = NestedInteger.getFromString(test1);
         System.out.println(t1.toString());
         System.out.println(NestedInteger.getFromString(test2).toString());
+        System.out.println(NestedInteger.getFromString(test3).toString());
     }
 }
