@@ -82,7 +82,8 @@ public class BuildBTFromRelationship {
         boolean isLeft[] = {true, true, false, false, false, false, true};
         
         TreeNode root = b.buildTree(child, parent, isLeft);
-        System.out.println(root.serialize());
+        //System.out.println(root.serialize());
+        root.printTree();
     }
 
 }
