@@ -30,7 +30,14 @@ public class LongestPalindromicSubseq {
             dp[i][i] = 1;
         
         
-        for (int rIdx = 1 ; rIdx < strLen; rIdx++) {
+        for (int leftIdx = strLen - 1 ; leftIdx >= 0; leftIdx--) {
+            for (int rightIdx = leftIdx + 1; rightIdx < strLen; rightIdx++) {
+                if (s.charAt(leftIdx) == s.charAt(rightIdx)) {
+                    dp[leftIdx][rightIdx] = dp[leftIdx+1][rightIdx-1] + 2;
+                } else {
+                    dp[leftIdx][rightIdx] = Math.max(dp[leftIdx+1][rightIdx], dp[leftIdx][rightIdx-1]);
+                }
+            }
 
             
         }
