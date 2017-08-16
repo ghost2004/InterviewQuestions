@@ -35,7 +35,7 @@ public class StringTreeDepth {
         int depth = -1;
         int curDepth = -1;
         Stack<Integer> stack = new Stack<>();
-        stack.push(curDepth);
+        //stack.push(curDepth);
         for (int i = 0; i < in.length(); i++) {
             switch (in.charAt(i)) {
             case '0':
@@ -65,7 +65,7 @@ public class StringTreeDepth {
             }
         }
         
-        if (stack.isEmpty() || stack.peek() != -1)
+        if (stack.size() != 1 || stack.peek() != -1)
             return -1;
         
         return depth;
@@ -106,7 +106,7 @@ public class StringTreeDepth {
     
     public static void main(String args[]) {
         StringTreeDepth s = new StringTreeDepth();
-        System.out.println(s.getTreeDepth("((00)0)"));
+        System.out.println(s.getTreeDepth("(00)"));
     }
 
 }
