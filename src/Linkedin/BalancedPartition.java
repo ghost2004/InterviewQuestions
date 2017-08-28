@@ -38,26 +38,39 @@ public class BalancedPartition {
         int total = 0;
         for (int i:arr)
             total += i;
+        // the minimum difference should be 0, so we are looking for half of the total sum
         int target = total/2;
         int len = arr.length;
         
+        // dp[i][j] means if there is subset in {A0..Ai} which sum is j
         boolean dp[][] = new boolean[len+1][target+1];
 
+        // by default we set sum 0 to true
         for (int i = 0; i <= len; i++)
             dp[i][0] = true;
+        // all empty subset for any sum is false
         for (int i = 1; i <= target; i++)
             dp[0][i] = false;
-        
+        // scan the array from left to right
         for (int idx = 1; idx <= len; idx++) {
+            // check all possible sum
             for (int sum = 1; sum <= target; sum++) {
+                // if {A0..Ai-1} is true, {A0..Ai} must be true
+                // since {A0..Ai-1} is a subset of {A0..Ai} 
                 dp[idx][sum] = dp[idx-1][sum];
                 if (arr[idx-1] <= sum)
+                    // current element could be one of the candidate
                     dp[idx][sum] |= dp[idx][sum - arr[idx-1]];
             }
         }
         int diff = total;
+        // we got all status of subset here
+        // so scan from target
         for (int i = target; i >= 1; i--) {
             if (dp[len][i]) {
+                // there is subset with sum i
+                // so the sum of other subset will be total - i
+                // the difference is (total - i) - i = total - 2*i
                 return total - 2*i;
             }
         }
