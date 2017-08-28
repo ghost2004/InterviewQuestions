@@ -34,5 +34,35 @@ public class BalancedPartition {
     
     // DP solution
     
+    public int findMin(int arr[]) {
+        int total = 0;
+        for (int i:arr)
+            total += i;
+        int target = total/2;
+        int len = arr.length;
+        
+        boolean dp[][] = new boolean[len+1][target+1];
+
+        for (int i = 0; i <= len; i++)
+            dp[i][0] = true;
+        for (int i = 1; i <= target; i++)
+            dp[0][i] = false;
+        
+        for (int idx = 1; idx <= len; idx++) {
+            for (int sum = 1; sum <= target; sum++) {
+                dp[idx][sum] = dp[idx-1][sum];
+                if (arr[idx-1] <= sum)
+                    dp[idx][sum] |= dp[idx][sum - arr[idx-1]];
+            }
+        }
+        int diff = total;
+        for (int i = target; i >= 1; i--) {
+            if (dp[len][i]) {
+                return total - 2*i;
+            }
+        }
+        return diff;
+    }
+    
 
 }
