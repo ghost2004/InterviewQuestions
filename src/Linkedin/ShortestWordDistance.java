@@ -9,6 +9,7 @@ For example, Assume that words = ["practice", "makes", "perfect", "coding", "mak
 Given word1 = "coding", word2 = "practice", return 3. 
 Given word1 = "makes", word2 = "coding", return 1.
  */
+
 public class ShortestWordDistance {
     public int shortest(String words[], String word1, String word2) {
         int idx1 = -1;
