@@ -128,6 +128,12 @@ public class KClosestPoints {
         for (Point p:rp) {
             System.out.print(p.toString()+ " ");
         }
+        System.out.println();
+        rp = pk.kClosest2(arr, o, 3);
+        
+        for (Point p:rp) {
+            System.out.print(p.toString()+ " ");
+        }
         
     }
 }
