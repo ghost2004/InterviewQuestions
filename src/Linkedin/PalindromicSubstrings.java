@@ -18,12 +18,8 @@ Note:
 The input string length won't exceed 1000.
  */
 public class PalindromicSubstrings {
-    private int count(String s, int start, int end) {
+    private int count(String s, int left, int right) {
         int cnt = 0;
-        if (start != end && s.charAt(start) != s.charAt(end))
-            return 0;
-        int left = start;
-        int right = end;
         while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
             cnt++;
             left--;
@@ -36,8 +32,7 @@ public class PalindromicSubstrings {
         int cnt = 0;
         for (int i = 0; i < s.length(); i++) {
             cnt += count(s, i, i);
-            if (i < s.length()-1)
-                cnt += count(s, i, i+1);
+            cnt += count(s,i, i+1);
             
         }
         
