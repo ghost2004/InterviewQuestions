@@ -59,12 +59,40 @@ public class KClosestPoints {
         }
     }
     
+    private int partition(Distance dis[], int start, int end) {
+        int left = start;
+        int right = end;
+        Distance pivot = dis[left]; 
+        
+        
+        while (left < right) {
+            while (left < right && dis[right].compareTo(pivot) > 0)
+                right--;
+            dis[left] = dis[right];
+            while (left < right && dis[left].compareTo(pivot) < 0)
+                left++;
+            dis[right] = dis[left];
+        }
+        
+        dis[left] = pivot;
+        
+        return left;
+    }
+    
     private void quickSelect(Distance dis[], int k) {
         int start = 0;
         int end = dis.length - 1;
         
         while (start < end) {
+            int idx = partition(dis, start, end);
             
+            if (idx == k)
+                return;
+            if (idx < k)
+                start = idx+1;
+            else 
+                end = idx-1;
+
         }
     }
     
@@ -82,6 +110,8 @@ public class KClosestPoints {
         
         quickSelect(dis, k);
         
+        for (int i = 0; i < k; i++)
+            result[i] = dis[i].point;
         
         return result;
     }
