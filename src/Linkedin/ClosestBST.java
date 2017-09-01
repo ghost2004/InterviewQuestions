@@ -19,7 +19,14 @@ public class ClosestBST {
         int candidate = closestValue(child, target);
         
         if (Math.abs(target - root.val) < Math.abs(target - candidate))
-            return target;
+            return root.val;
         return candidate;
+    }
+    
+    public static void main(String args[]) {
+        ClosestBST b = new ClosestBST();
+        TreeNode t = TreeNode.deserialize("9,4,3,#,#,6,5,#,#,7,#,#,17,#,22,20,#");
+        t.printTree();
+        System.out.println(b.closestValue(t, 18));
     }
 }
