@@ -12,7 +12,7 @@ word1 and word2 may be the same and they represent two individual words in the l
 For example,
 Assume that words = ["practice", "makes", "perfect", "coding", "makes"].
 
-Given word1 = “makes”, word2 = “coding”, return 1.
+Given word1 = "makes", word2 = "coding", return 1.
 Given word1 = "makes", word2 = "makes", return 3.
  */
 public class ShortestWordDistanceIII {
