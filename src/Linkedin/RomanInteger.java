@@ -17,7 +17,7 @@ Notation    IV  IX  XL  XC  CD  CM
 
  */
 
-import java.util.*;
+
 public class RomanInteger {
 
     /*
