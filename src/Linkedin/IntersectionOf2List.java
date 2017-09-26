@@ -6,9 +6,9 @@ package Linkedin;
 For example, the following two linked lists:
 
 A:          a1 ¡ú a2
-                   ¨K
+                                                                  ¨K
                      c1 ¡ú c2 ¡ú c3
-                   ¨J            
+                                                               ¨J            
 B:     b1 ¡ú b2 ¡ú b3
 begin to intersect at node c1.
 
@@ -61,5 +61,43 @@ public class IntersectionOf2List {
         return null;
         
     }
-
+    
+    /*
+     * follow up: what if there are loops in these 2 linked list?
+     * 
+     * implement a function to return if they have intersection or not
+     * 
+     */
+    
+    private ListNode getLoop(ListNode node) {
+        ListNode fast,slow;
+        
+        fast = slow = node;
+        while (fast.next != null  && fast.next.next !=null) {
+            slow = slow.next;
+            fast = fast.next.next;
+            if (slow == fast)
+                return slow;
+        }
+        
+        return null;
+    }
+    
+    public boolean isInsectionLoop(ListNode nodeA, ListNode nodeB) {
+        ListNode node1 = getLoop(nodeA);
+        if (node1 == null)
+            return false;
+        ListNode node2 = getLoop(nodeB);
+        if (node2 == null)
+            return false;
+        ListNode tmp = node2.next;
+        while (tmp != node2) {
+            if (tmp == node1)
+                return true;
+            tmp = tmp.next;
+        }
+        
+        return false;
+    }
+   
 }
