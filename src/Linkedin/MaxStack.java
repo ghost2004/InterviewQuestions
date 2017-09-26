@@ -81,5 +81,18 @@ public class MaxStack {
         return node.value;
     }
     
+    public static void main(String args[]) {
+        MaxStack stack = new MaxStack();
+        
+        stack.push(2);
+        stack.push(1);
+        System.out.println("Max peek after 2->1 " + stack.peekMax());
+        stack.push(6);
+        stack.push(5);
+        stack.push(5);
+        System.out.println("Max peek after 2->1->6->5->5 " + stack.popMax() + " now max:"+stack.peekMax());
+        stack.popMax();
+        System.out.println("Max peek after pop 6,5:  " + stack.peekMax());
+    }
 
 }
