@@ -93,6 +93,8 @@ public class MaxStack {
         System.out.println("Max peek after 2->1->6->5->5 " + stack.popMax() + " now max:"+stack.peekMax());
         stack.popMax();
         System.out.println("Max peek after pop 6,5:  " + stack.peekMax());
+        stack.pop();
+        System.out.println("Max peek  " + stack.peekMax()+ " stack peek " + stack.peek());
     }
 
 }
