@@ -3,8 +3,8 @@ package Common;
 public class Interval {
     public int start;
     public int end;
-    Interval() { start = 0; end = 0; }
-    Interval(int s, int e) { start = s; end = e; }
+    public Interval() { start = 0; end = 0; }
+    public Interval(int s, int e) { start = s; end = e; }
     
     public static Interval[] getFromArray(int start[], int end[]){
         if (start == null || end == null || start.length != end.length)
