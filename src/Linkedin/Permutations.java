@@ -48,6 +48,33 @@ public class Permutations {
         
     }
     
+    private void permS(int nums[], int idx, List<List<Integer>> result) {
+        if (idx >= nums.length) {
+            List<Integer> t = new ArrayList<>();
+            for (int i:nums)
+                t.add(i);
+            result.add(t);
+            return;
+        }
+        
+        for (int i = idx; i < nums.length; i++) {
+            swap(nums, idx, i);
+            permS(nums, idx+1, result);
+            swap(nums, idx, i);
+        }
+    }
+    private void swap(int a[], int i, int j) {
+        int tmp = a[i];
+        a[i] = a[j];
+        a[j] = tmp;
+    }
+    
+    public List<List<Integer>> permute2(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
+        permS(nums, 0, result);
+        return result;
+    }
+    
     /*
      * Leetcode 47 Permutations II
      * Given a collection of numbers that might contain duplicates, return all possible unique permutations.
