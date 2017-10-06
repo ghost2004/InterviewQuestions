@@ -25,25 +25,43 @@ public class BombEnemy {
         int n = grid.length > 0 ? grid[0].length : 0;
         
         int res = 0;
+        // row stands for enemies we can kill in cur row
         int row = 0;
+        // col[i] stands for enemies we can kill in col i
         int col[] = new int[n];
         
+        // scan from up to down
         for (int i = 0; i < m; i++) {
+            // scan from left to right
             for (int j = 0; j < n; j++) {
+                // first let's do with row data
+                // reset row to 0 in this 2 conditions
+                // 1. start of row
+                // 2. a wall in the left grid
                 if (j == 0 || grid[i][j-1] == 'Y') {
                     row = 0;
+                    // get the enemies we can kill in this row , 
+                    // until we hit wall or reach the end of the row 
                     for (int k = j; k < n && grid[i][k] != 'Y'; k++) {
                         if (grid[i][k] == 'X')
                             row++;
                     }
                 }
+                // second let's do with the column data
+                // reset col[i] to 0 in this 2 conditions
+                // 1. start of column
+                // 2. a wall in up grid
                 if (i == 0 || grid[i-1][j] == 'Y') {
                     col[j] = 0;
+                    // get the enemies we can kill in this column,
+                    // until we hit wall or reach the end of the column
                     for (int k = i; k < m&& grid[k][j] != 'Y'; k++) {
                         if (grid[k][j] == 'X')
                             col[j]++;
                     }
                 }
+                // if we can place bomb in this grid, 
+                // calculate the numbers ( row + column )  
                 if (grid[i][j] == '0')
                     res = Math.max(res, row+col[j]);
             }
