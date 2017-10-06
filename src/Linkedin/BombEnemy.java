@@ -18,5 +18,49 @@ package Linkedin;
     return 3. (Placing a bomb at (1,1) kills 3 enemies)
  */
 public class BombEnemy {
+    public static int maxKilledEnemies(char[][] grid) {
+        if (grid == null)
+            return 0;
+        int m = grid.length;
+        int n = grid.length > 0 ? grid[0].length : 0;
+        
+        int res = 0;
+        int row = 0;
+        int col[] = new int[n];
+        
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (j == 0 || grid[i][j-1] == 'Y') {
+                    row = 0;
+                    for (int k = j; k < n && grid[i][k] != 'Y'; k++) {
+                        if (grid[i][k] == 'X')
+                            row++;
+                    }
+                }
+                if (i == 0 || grid[i-1][j] == 'Y') {
+                    col[j] = 0;
+                    for (int k = i; k < m&& grid[k][j] != 'Y'; k++) {
+                        if (grid[k][j] == 'X')
+                            col[j]++;
+                    }
+                }
+                if (grid[i][j] == '0')
+                    res = Math.max(res, row+col[j]);
+            }
+        }
+        
+        
+        return res;
+    }
+    
+    public static void main(String args[]) {
+        char test1[][] = {
+                {'0', 'X', '0', '0'}, 
+                {'X', '0', 'Y', 'X'}, 
+                {'0', 'X', '0', '0'}
+        };
+        System.out.println(maxKilledEnemies(test1));
+
+    }
 
 }
