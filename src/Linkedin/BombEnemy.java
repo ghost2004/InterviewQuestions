@@ -70,7 +70,19 @@ public class BombEnemy {
         
         return res;
     }
-    
+    /*
+     * Follow up 1:
+      There is no walls this time.
+      The bomb kills all the enemies in the same row and column from the planted 
+      point
+      Given 2D grid, returns minimum bombs that can kill all enemies
+     * 
+     */
+    public static int minBombs(int grid[][]) {
+        
+        
+        return 0;
+    }
     public static void main(String args[]) {
         char test1[][] = {
                 {'0', 'X', '0', '0'}, 
