@@ -83,12 +83,74 @@ public class PartitionEqualSubsetSum {
      *  follow up
      *  given a list of numbers, see if you can separate them into k groups 
      *  such that each group has the same sum
+     *  
+     *  Ideas from http://www.geeksforgeeks.org/partition-set-k-subsets-equal-sum/
      */
+    
+    // used[i] means item at nums[i] is used by other subset
+    private boolean used[];
+    // subSetSum[i] means sum of subet i
+    private int subSetSum[];
+    
+    private boolean dfs(int nums[], int target, int k, int curSubSet, int idx ) {
+        if (subSetSum[curSubSet] == target) {
+            if (curSubSet == k - 2)
+                return true;
+            return dfs(nums, target, k, curSubSet+1, idx-1);
+        }
+        for (int i = idx; i >= 0; i--) {
+            
+            if (!used[i] && subSetSum[curSubSet] <= target - nums[i]) {
+                used[i] = true;
+                subSetSum[curSubSet] += nums[i];
+                boolean result = dfs(nums, target, k, curSubSet, i-1);
+                used[i] = false;
+                if (result)
+                    return true;
+            }
+        }
+        
+        return false;
+    }
+    public boolean canPartitionK(int nums[], int k) {
+        if (nums == null || nums.length < k)
+            return false;
+        int len = nums.length;
+        int sum = 0;
+        int maxItem = 0;
+        for (int i: nums) {
+            sum += i;
+            maxItem = Math.max(maxItem, i);
+        }
+        
+        if (sum % k != 0 || maxItem > sum/k)
+            return false;
+        
+        int target = sum / k;
+        
+        used = new boolean[len];
+        subSetSum = new int[k];
+        /*
+        used[len-1] = true;
+        subSetSum[0] = nums[len-1];
+        */
+        return dfs(nums, target, k, 0, len-1);
+
+    }
     
     public static void main(String args[]) {
         PartitionEqualSubsetSum p = new PartitionEqualSubsetSum();
         int a1[] = {1,2,5};
         
         System.out.println(p.canPartition(a1));
+        
+        int a2[] = {2, 1, 4, 5, 3, 3};
+        int a3[] = {2, 1, 4, 5, 6};
+        int a4[] = {2, 3, 5, 5, 6};
+        
+        System.out.println(p.canPartitionK(a2, 3));
+        System.out.println(p.canPartitionK(a3, 3));
+        System.out.println(p.canPartitionK(a4, 3));
+        
     }
 }
