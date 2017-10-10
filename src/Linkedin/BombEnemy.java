@@ -17,8 +17,10 @@ package Linkedin;
     
     return 3. (Placing a bomb at (1,1) kills 3 enemies)
  */
+import java.util.*;
+import Common.Point;
 public class BombEnemy {
-    public static int maxKilledEnemies(char[][] grid) {
+    public  int maxKilledEnemies(char[][] grid) {
         if (grid == null)
             return 0;
         int m = grid.length;
@@ -72,24 +74,89 @@ public class BombEnemy {
     }
     /*
      * Follow up 1:
-      There is no walls this time.
+      There is no walls this time. 0 means empty, and 1 means an enemy
       The bomb kills all the enemies in the same row and column from the planted 
       point
       Given 2D grid, returns minimum bombs that can kill all enemies
      * 
      */
-    public static int minBombs(int grid[][]) {
+    private void addMap(HashMap<Integer, List<Point>> map, int key, Point p){
+        List<Point> list = map.get(key);
+        if (list == null ) {
+            list = new LinkedList<>();
+            map.put(key, list);
+        }
+        list.add(p);
+    }
+    private int[][] getSortedMap(HashMap<Integer, List<Point>> map) {
+        int array[][] = new int[map.size()][2];
+        int i = 0;
+        for (Map.Entry<Integer, List<Point>> entry:map.entrySet()) {
+            array[i][0] = entry.getKey();
+            array[i][1] = entry.getValue().size();
+            i++;
+        }
         
+        Arrays.sort(array, (a,b) -> b[1] - a[1]);
+        return array;
+    }
+    public int minBombs(int grid[][]) {
+        if (grid == null || grid.length < 1)
+            return 0;
+        int count = 0;
+        int m = grid.length;
+        int n = grid[0].length;
+        HashSet<Point> points = new HashSet<>();
+        HashMap<Integer, List<Point>> xMap = new HashMap<>();
+        HashMap<Integer, List<Point>> yMap = new HashMap<>();
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (grid[i][j] == 1) {
+                    Point p = new Point(i, j);
+                    points.add(p);
+                    addMap(xMap, i, p);
+                    addMap(yMap, j, p);                    
+                }
+            }
+            
+        }
         
-        return 0;
+        int xArr[][] = getSortedMap(xMap);
+        int yArr[][] = getSortedMap(yMap);
+        
+        int idx = 0;
+        
+        while (!points.isEmpty()) {
+            int x = xArr[idx][0];
+            int y = yArr[idx][0];
+            List<Point> list = xMap.get(x);
+            for (Point p:list)
+                points.remove(p);
+            list = yMap.get(y);
+            for (Point p:list)
+                points.remove(p);
+            idx++;
+            count++;
+        }
+        
+        return count;
     }
     public static void main(String args[]) {
+        BombEnemy b = new BombEnemy();
         char test1[][] = {
                 {'0', 'X', '0', '0'}, 
                 {'X', '0', 'Y', 'X'}, 
                 {'0', 'X', '0', '0'}
         };
-        System.out.println(maxKilledEnemies(test1));
+        System.out.println(b.maxKilledEnemies(test1));
+        
+        int arr1[][] = {
+                { 0, 1, 0, 0, 1},
+                { 1, 0, 1, 0, 0},
+                { 0, 1, 0, 0, 0}
+        };
+        
+        System.out.println(b.minBombs(arr1));
 
     }
 
