@@ -38,7 +38,7 @@ public class MySqrt {
         double end;
         
         if (x > 1) {
-            start = 0;
+            start = 1;
             end = x;
         } else {
             start = x;
@@ -48,7 +48,7 @@ public class MySqrt {
         while (end - start > precision) {
             double mid = (start+end)/2;
             double s = mid*mid;
-            if (s == x)
+            if (Math.abs(x-s) < precision)
                 return mid;
             else if (s < x) 
                 start = mid;
