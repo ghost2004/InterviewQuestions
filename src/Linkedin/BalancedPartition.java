@@ -4,7 +4,7 @@ package Linkedin;
  * between their sums is minimum.
 
 If there is a set S with n elements, then if we assume Subset1 has m elements, Subset2 must have n-m elements 
-and the value of abs(sum(Subset1) – sum(Subset2)) should be minimum.
+and the value of abs(sum(Subset1)-sum(Subset2)) should be minimum.
 
 Example:
 
