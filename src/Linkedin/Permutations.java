@@ -165,12 +165,12 @@ public class Permutations {
         while (nums[firstDescending] >= nums[firstSwap])
             firstSwap --;
         // swap this 2 numbers
-        // example 6，3，4，9，8，7，1
+        // example 6,3,4,9,8,7,1
         // first Descending number is 4
         // first number need to be swap is 7
-        // after swap it will be 6，3，7，9，8，4，1
+        // after swap it will be 6,3,7,9,8,4,1
         // the number after swap point will be Descending
-        // 9，8，4，1
+        // 9,8,4,1
         swap(nums,firstDescending,firstSwap);
         // reverse that part, and we got the result
         reverse(nums, firstDescending+1, len-1);
