@@ -37,7 +37,7 @@ public class ShuffleArray {
     public int[] shuffle() {
         int result[] =  nums.clone();
         
-        for (int i = 1; i < nums.length; i++) {
+        for (int i = 0; i < nums.length; i++) {
             int n = (int)(Math.random()*(i+1));
             int temp = result[i];
             result[i] = result[n];
