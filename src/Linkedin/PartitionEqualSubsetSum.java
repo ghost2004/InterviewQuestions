@@ -1,4 +1,7 @@
 package Linkedin;
+
+import java.util.Arrays;
+
 /*
  * Leetcode 416. Partition Equal Subset Sum
  * Given a non-empty array containing only positive integers, find if the array can be partitioned 
@@ -96,8 +99,9 @@ public class PartitionEqualSubsetSum {
         if (subSetSum[curSubSet] == target) {
             if (curSubSet == k - 2)
                 return true;
-            return dfs(nums, target, k, curSubSet+1, idx-1);
+            return dfs(nums, target, k, curSubSet+1, nums.length-1);
         }
+       
         for (int i = idx; i >= 0; i--) {
             
             if (!used[i] && subSetSum[curSubSet] <= target - nums[i]) {
@@ -105,6 +109,7 @@ public class PartitionEqualSubsetSum {
                 subSetSum[curSubSet] += nums[i];
                 boolean result = dfs(nums, target, k, curSubSet, i-1);
                 used[i] = false;
+                subSetSum[curSubSet] -= nums[i];
                 if (result)
                     return true;
             }
@@ -115,13 +120,20 @@ public class PartitionEqualSubsetSum {
     public boolean canPartitionK(int nums[], int k) {
         if (nums == null || nums.length < k)
             return false;
+        if (k == 1)
+            return true;
+        
         int len = nums.length;
         int sum = 0;
         int maxItem = 0;
+
         for (int i: nums) {
             sum += i;
             maxItem = Math.max(maxItem, i);
         }
+        
+
+
         
         if (sum % k != 0 || maxItem > sum/k)
             return false;
@@ -130,10 +142,10 @@ public class PartitionEqualSubsetSum {
         
         used = new boolean[len];
         subSetSum = new int[k];
-        /*
+        
         used[len-1] = true;
         subSetSum[0] = nums[len-1];
-        */
+        
         return dfs(nums, target, k, 0, len-1);
 
     }
@@ -142,15 +154,22 @@ public class PartitionEqualSubsetSum {
         PartitionEqualSubsetSum p = new PartitionEqualSubsetSum();
         int a1[] = {1,2,5};
         
-        System.out.println(p.canPartition(a1));
+        //System.out.println(p.canPartition(a1));
         
         int a2[] = {2, 1, 4, 5, 3, 3};
         int a3[] = {2, 1, 4, 5, 6};
         int a4[] = {2, 3, 5, 5, 6};
-        
+        int a5[] = {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
+        int a6[] = {4,3,2,3,5,2,1};
+                
+                
+        /*
         System.out.println(p.canPartitionK(a2, 3));
         System.out.println(p.canPartitionK(a3, 3));
         System.out.println(p.canPartitionK(a4, 3));
+        System.out.println(p.canPartitionK(a5, 1));
+        */
+        System.out.println(p.canPartitionK(a6, 4));
         
     }
 }
