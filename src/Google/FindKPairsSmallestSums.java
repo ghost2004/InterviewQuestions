@@ -33,21 +33,25 @@ import java.util.*;
 public class FindKPairsSmallestSums {
     public List<int[]> kSmallestPairs(int[] nums1, int[] nums2, int k) {
         List<int[]> out = new ArrayList<>();
-        if (k <= 0)
+        if (k <= 0 || nums1.length == 0 || nums2.length == 0)
             return out;
-        int p1 = 0;
-        int p2 = 0;
-        while (out.size() < k && p1 < nums1.length && p2 < nums2.length) {
-            int c[] = new int[2];
-            c[0] = nums1[p1];
-            c[1] = nums2[p2];
-            out.add(c);
+
+        PriorityQueue<int[]> queue = new PriorityQueue<>((a,b)->a[0]+a[1]-b[0]-b[1]);
+        
+        for (int i = 0; i < nums1.length && i < k; i++)
+            queue.offer(new int[]{nums1[i], nums2[0], 0});
+        
+        while (k-- > 0 && !queue.isEmpty()) {
+            int c[] = queue.poll();
+            int in[] = new int[2];
+            in[0] = c[0];
+            in[1] = c[1];
+            out.add(in);
             
-            if (p2 == nums2.length-1 || (p1 < nums1.length-1 && nums1[p1+1] < nums2[p2+1])) {
-                p1++;
-            } else {
-                p2++;
-            }
+            if (c[2] == nums2.length-1)
+                continue;
+            
+            queue.offer(new int[]{c[0], nums2[c[2]+1], c[2]+1});
         }
         
         return out;
