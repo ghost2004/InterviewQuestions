@@ -29,6 +29,27 @@ Return: [1,3],[2,3]
 All possible pairs are returned from the sequence:
 [1,3],[2,3]
  */
+import java.util.*;
 public class FindKPairsSmallestSums {
-
+    public List<int[]> kSmallestPairs(int[] nums1, int[] nums2, int k) {
+        List<int[]> out = new ArrayList<>();
+        if (k <= 0)
+            return out;
+        int p1 = 0;
+        int p2 = 0;
+        while (out.size() < k && p1 < nums1.length && p2 < nums2.length) {
+            int c[] = new int[2];
+            c[0] = nums1[p1];
+            c[1] = nums2[p2];
+            out.add(c);
+            
+            if (p2 == nums2.length-1 || (p1 < nums1.length-1 && nums1[p1+1] < nums2[p2+1])) {
+                p1++;
+            } else {
+                p2++;
+            }
+        }
+        
+        return out;
+    }
 }
