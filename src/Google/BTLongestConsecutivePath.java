@@ -4,7 +4,7 @@ import Common.TreeNode;
 public class BTLongestConsecutivePath {
     
     /*
-     * Leetcode 298 Binary Tree Longest Consecutive Sequence 
+     * [LeetCode 298] Binary Tree Longest Consecutive Sequence 
      * 
      * Given a binary tree, find the length of the longest consecutive sequence path.
 
@@ -48,7 +48,7 @@ public class BTLongestConsecutivePath {
     }
     
     /*
-     * [LeetCode 549] Binary Tree Longest Consecutive Sequence 
+     * [LeetCode 549] Binary Tree Longest Consecutive Sequence II
      * Given a binary tree, you need to find the length of Longest Consecutive Path 
      * in Binary Tree.
 
@@ -80,10 +80,44 @@ public class BTLongestConsecutivePath {
     Note: All the values of tree nodes are in the range of [-1e7, 1e7].
      */
     
+    int maxLen = 0;
+    
+    public int[] longestPath(TreeNode node) {
+        int out[] = {0, 0};
+        int inc = 1;
+        int dec = 1;
+        
+        if (node.left != null) {
+            int lc[] = longestPath(node.left);
+            if (node.val == node.left.val - 1) 
+                inc = lc[0] + 1;
+            else if (node.val ==  node.left.val + 1)
+                dec = lc[1] + 1;
+        }
+        
+        if (node.right != null) {
+            int rc[] = longestPath(node.right);
+            if (node.val == node.right.val - 1)
+                inc = Math.max(inc, rc[0]+1);
+            else if (node.val == node.right.val + 1)
+                dec = Math.max(dec, rc[1]+1);
+                
+            
+        }
+        
+        out[0] = inc;
+        out[1] = dec;
+        
+        maxLen = Math.max(maxLen, inc+dec-1);
+        
+        return out;
+    }
+    
     public int longestConsecutiveII(TreeNode root) {
         if (root == null)
             return 0;
-        return dfs(root, 0, root.val-1);
+        longestPath(root);
+        return maxLen;
     }
 
 }
