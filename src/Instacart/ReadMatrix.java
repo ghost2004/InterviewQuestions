@@ -26,9 +26,9 @@ public class ReadMatrix {
         if (coordinates.length != 2)
             return null;
         try {
-            out[0] = Integer.valueOf(coordinates[0]);
-            out[1] = Integer.valueOf(coordinates[1]);
-        } catch(NumberFormatException e) {
+            out[0] = Integer.valueOf(coordinates[0].trim());
+            out[1] = Integer.valueOf(coordinates[1].trim());
+        } catch (NumberFormatException e) {
             return null;
         }
         
@@ -57,7 +57,6 @@ public class ReadMatrix {
                     firstLine = false;
                 }
             } else if (text.length() == 0) {
-                //System.out.println("We have  decided to exit the program");
                 break;
             } else {
                 matrix.add(text);
