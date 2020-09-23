@@ -63,6 +63,8 @@ public class ReadMatrix {
             }
         }
         
+        br.close();
+        
         if(y > matrix.size() - 1 || x > matrix.get(0).length() - 1) {
             System.out.println("Invalid coordinates for " + x + ", "+ y);
         } else {
