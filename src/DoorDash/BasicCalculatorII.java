@@ -35,6 +35,18 @@ public class BasicCalculatorII {
             if (Character.isDigit(c)) {
                 number = number * 10 + c - '0';
             } 
+            if (c == '('){
+                int j = i + 1, count = 1;
+                for (; j < s.length(); j++){
+                    if (s.charAt(j) == '(') count++;
+                    else if (s.charAt(j) == ')') count--;
+
+                    if (count == 0) break;
+                }
+
+                number = calculate(s.substring(i + 1, j));
+                i = j;
+            }
             if((!Character.isDigit(c) && c != ' ' ) || i==s.length()-1){
                 switch (sign) {
                 case '+':
