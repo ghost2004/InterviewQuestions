@@ -119,7 +119,7 @@ public class ConnectFour {
         }
         _lastMoveX = col;
         _lastMoveY = _curHeight[col];
-        _grid[_curHeight[col]][col] = c;
+        _grid[_lastMoveY][_lastMoveX] = c;
         _curHeight[col]++;
         return isWinningPlay();
     }
