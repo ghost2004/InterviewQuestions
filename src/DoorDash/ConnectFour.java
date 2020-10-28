@@ -117,6 +117,8 @@ public class ConnectFour {
         if (_curHeight[col] >= _height) {
             throw new Exception(String.format("column %d is overflow", col ));
         }
+        _lastMoveX = col;
+        _lastMoveY = _curHeight[col];
         _grid[_curHeight[col]][col] = c;
         _curHeight[col]++;
         return isWinningPlay();
