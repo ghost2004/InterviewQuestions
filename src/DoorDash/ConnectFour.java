@@ -36,13 +36,14 @@ public class ConnectFour {
     }
     
     public String toString() {
-        return IntStream.range(0,  _width).
+        String output =  IntStream.range(0,  _width).
                mapToObj(Integer::toString).
                collect(Collectors.joining()) + 
-               "\n" +
-               Arrays.stream(_grid).
-               map(String::new).
-               collect(Collectors.joining("\n"));
+               "\n";
+        for (int i = _height-1 ; i >= 0; i--) {
+            output += new String(_grid[i]) + "\n";
+        }
+        return output;
     }
     
     // get string representation of the row containing the last play of the user
@@ -152,9 +153,35 @@ public class ConnectFour {
         /*
         String path = "Z://Drama//test";   
         getFile(path);   */
+        int height = 6;
+        int width = 7;
+        ConnectFour f = new ConnectFour(width, height);
         
-        ConnectFour f = new ConnectFour(7, 6);
+        Scanner input = new Scanner(System.in);
+        
+        boolean winning = false;
+        int total = height * width;
+        int moves = 0;
+        Player curPlayer = Player.Red;
+        while (!winning && moves < total) {
+            
+            System.out.println(f.toString());
+            System.out.println("\nPlayer " + curPlayer.name() + " turn: ");
+            int col = input.nextInt();
+            try {
+                winning = f.play(curPlayer, col);
+                if (winning)
+                    System.out.println("Winner is " + curPlayer.name());
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                continue;
+            }
+            curPlayer = curPlayer == Player.Red ? Player.Yellow : Player.Red;
+            moves++;
+        }
         System.out.println(f.toString());
+        if (!winning)
+            System.out.println("Tie Game");
         
     }
 
