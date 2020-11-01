@@ -128,7 +128,7 @@ public class MemoryDatabase {
         
         public int begin() {
             _transactions.add(new DataSnapshot(false));
-            return _transactions.size();
+            return _transactions.size() - 1;
         }
         
         public void commit() {
@@ -146,7 +146,7 @@ public class MemoryDatabase {
                 return -1;
             int size = _transactions.size();
             _transactions.remove(size - 1);
-            return size;
+            return size - 1;
         }
         
         public void executeCommand(String raw) {
@@ -189,7 +189,10 @@ public class MemoryDatabase {
                 break;
             case ROLLBACK:
                 int r = rollback();
-                System.out.println("transaction " + r + " is rolled back.");
+                if (r < 0) 
+                    System.out.println("no transaction.");
+                else 
+                    System.out.println("transaction " + r + " is rolled back.");
                 break;
             case COMMIT:
                 commit();
