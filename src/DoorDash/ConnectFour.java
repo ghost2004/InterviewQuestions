@@ -134,9 +134,9 @@ public class ConnectFour {
         for(int i=0;i<array.length;i++){   
             if(array[i].isFile()){   
                 String fname =  array[i].getName();
-                System.out.println(fname);  
+                //System.out.println(fname);  
                 if (fname.endsWith("mp4")) {
-                   int idx = fname.indexOf("Home With Kids Season 1 EP. ");
+                   int idx = fname.indexOf("Home With Kids Season 2 EP. ");
                    String newName = path+"//"+fname.substring(idx, idx+30)+".mp4";
                    System.out.println(newName);
                    array[i].renameTo(new File(newName));
@@ -150,9 +150,10 @@ public class ConnectFour {
     }   
     
     public static void main(String args[]) {
-        /*
+        
         String path = "Z://Drama//test";   
-        getFile(path);   */
+        getFile(path);
+        /*
         int height = 6;
         int width = 7;
         ConnectFour f = new ConnectFour(width, height);
@@ -182,7 +183,7 @@ public class ConnectFour {
         System.out.println(f.toString());
         if (!winning)
             System.out.println("Tie Game");
-        
+        */
     }
 
 }
